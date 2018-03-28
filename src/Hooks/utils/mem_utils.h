@@ -12,10 +12,18 @@ namespace mem_utils {
 	// -> nopCount: The count of the NOPs to be inserted after the 5 CALL bytes.
 	void InstallHook(void(*func)(void), DWORD destAddr, size_t nopCount);
 
+	void InstallHook(void(*func)(void), DWORD destAddr, DWORD endAddr);
+
+	void InstallHook(void(*func)(void), DWORD destAddr);
+
 	// Copies the given data to a given address.
 	// Parameters:
 	// -> destAddr: The address where the data should be copied to.
 	// -> data: The pointer to the data.
 	// -> byteCount: The length of the data to be copied (byte count).
-	void PatchMemory(DWORD destAddr, void *data, size_t byteCount);
+	void SafeWrite(DWORD destAddr, void *data, size_t byteCount);	
+
+	void FillWithNops(DWORD destAddr, size_t count);
+
+	void FillWithNops(DWORD destAddr, DWORD endAddr);
 }

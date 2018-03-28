@@ -3,6 +3,22 @@
 namespace mem_utils {
 	void InstallHook(void(*func)(void), DWORD destAddr, size_t nopCount)
 	{
+		InstallHook(func, destAddr, (DWORD)(destAddr + 5 + nopCount));
+	}
+
+	void InstallHook(void(*func)(void), DWORD destAddr, DWORD endAddr)
+	{
+		InstallHook(func, destAddr);
+
+		// If NOPs are required, create them
+		if (endAddr > destAddr + 5)
+		{
+			FillWithNops(destAddr + 5, endAddr);
+		}
+	}
+
+	void InstallHook(void(*func)(void), DWORD destAddr)
+	{
 		// Calculate relative jump offset excluding the 5 CALL bytes
 		DWORD callOffset = (PtrToUlong(func) - destAddr) - 5;
 
@@ -11,24 +27,10 @@ namespace mem_utils {
 		// -> Call function at relAddr bytes offset
 		BYTE patch[5] = { 0xE8, 0x00, 0x00, 0x00, 0x00 }; // call relAddr
 		memcpy(patch + 1, &callOffset, sizeof(DWORD));
-		PatchMemory(destAddr, patch, 5);
-
-		// If NOPs are required, create them
-		if (nopCount > 0)
-		{
-			// Create array with nopCount size and fill it with NOPs
-			BYTE *nops = new BYTE[nopCount];
-			memset(nops, 0x90, nopCount);
-
-			// Copy NOP array
-			PatchMemory(destAddr + 5, nops, nopCount);
-
-			// Free NOP array memory
-			delete nops;
-		}
+		SafeWrite(destAddr, patch, 5);
 	}
 
-	void PatchMemory(DWORD destAddr, void *data, size_t byteCount)
+	void SafeWrite(DWORD destAddr, void *data, size_t byteCount)
 	{
 		// Change page protection to enable writing
 		DWORD pageProtectOld = 0;
@@ -39,5 +41,29 @@ namespace mem_utils {
 
 		// Restore page protection
 		VirtualProtect((void *)destAddr, byteCount, pageProtectOld, &pageProtectOld);
+	}
+
+	void FillWithNops(DWORD destAddr, size_t count)
+	{
+		FillWithNops(destAddr, destAddr + count);
+	}
+
+	void FillWithNops(DWORD destAddr, DWORD endAddr)
+	{
+		if (endAddr <= destAddr) {
+			return;
+		}
+
+		unsigned int count = endAddr - destAddr;
+
+		// Create array with nopCount size and fill it with NOPs
+		BYTE *nops = new BYTE[count];
+		memset(nops, 0x90, count);
+
+		// Copy NOP array
+		SafeWrite(destAddr, nops, count);
+
+		// Free NOP array memory
+		delete nops;
 	}
 }
