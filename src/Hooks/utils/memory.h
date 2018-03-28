@@ -3,7 +3,7 @@
 #define WIN32_LEAN_AND_MEAN
 #include <Windows.h>
 
-namespace mem_utils {
+namespace utils::memory {
 	// Creates a call for the given hook function at the given destination address.
 	// Optionally after the call several NOPs can be inserted to overwrite damaged opcodes / functions.
 	// Parameters:

@@ -1,6 +1,6 @@
-#include "utils/mem_utils.h"
+#include "utils/memory.h"
 
-namespace mem_utils {
+namespace utils::memory {
 	void InstallHook(void(*func)(void), DWORD destAddr, size_t nopCount)
 	{
 		InstallHook(func, destAddr, (DWORD)(destAddr + 5 + nopCount));

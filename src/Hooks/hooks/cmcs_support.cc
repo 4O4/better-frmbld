@@ -1,9 +1,9 @@
 #include "hooks/cmcs_support.h"
-#include "utils/hook_utils.h"
-#include "utils/fs_utils.h"
+#include "utils/hook.h"
+#include "utils/filesystem.h"
 
 namespace hooks::cmcs_support {
-	using fs_utils::FileExists;
+	using utils::filesystem::FileExists;
 	bool IsUnicodeEnv();
 
 	LPCSTR kCmcsUnicodeDllPath = "CMCS\\CMCS100U.DLL";

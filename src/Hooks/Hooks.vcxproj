@@ -158,12 +158,12 @@
     <ClInclude Include="hooks\cmcs_support.h" />
     <ClInclude Include="core\hook_commons.h" />
     <ClInclude Include="core\all_hooks.h" />
-    <ClInclude Include="utils\fs_utils.h" />
-    <ClInclude Include="utils\hook_utils.h" />
+    <ClInclude Include="utils\filesystem.h" />
+    <ClInclude Include="utils\hook.h" />
     <ClInclude Include="core\stdafx.h" />
     <ClInclude Include="core\targetver.h" />
     <ClInclude Include="hooks\gui_controls.h" />
-    <ClInclude Include="utils\mem_utils.h" />
+    <ClInclude Include="utils\memory.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="hooks\cmcs_support.cc" />
@@ -182,10 +182,10 @@
       </PrecompiledHeader>
     </ClCompile>
     <ClCompile Include="core\better_frmbld.cc" />
-    <ClCompile Include="utils\fs_utils.cc" />
+    <ClCompile Include="utils\filesystem.cc" />
     <ClCompile Include="core\stdafx.cc" />
     <ClCompile Include="hooks\gui_controls.cc" />
-    <ClCompile Include="utils\mem_utils.cc" />
+    <ClCompile Include="utils\memory.cc" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

@@ -1,5 +1,5 @@
 #include "hooks/gui_controls.h"
-#include "utils/hook_utils.h"
+#include "utils/hook.h"
 #include <string>
 
 namespace hooks::gui_controls {

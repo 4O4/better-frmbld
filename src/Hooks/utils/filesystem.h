@@ -2,6 +2,6 @@
 
 #include <Windows.h>
 
-namespace fs_utils {
+namespace utils::filesystem {
 	bool FileExists(LPCSTR fileName);
 }
