@@ -6,7 +6,8 @@
 #include "core/all_hooks.h"
 #include "utils/mem_utils.h"
 
-#define INSTALL_HOOK(name) mem_utils::InstallHook(name, name##HookAddr, name##HookNopsCount);
+#define INSTALL_HOOK_N(name) mem_utils::InstallHook(name, name##HookStartAddr, (size_t) name##HookNopsCount);
+#define INSTALL_HOOK(name) mem_utils::InstallHook(name, name##HookStartAddr, (DWORD) name##HookEndAddr);
 
 BETTER_FRMBLD_API void Init()
 {
