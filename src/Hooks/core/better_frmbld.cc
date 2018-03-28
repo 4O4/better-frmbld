@@ -12,6 +12,7 @@
 BETTER_FRMBLD_API void Init()
 {
 	INSTALL_HOOK(hooks::gui_controls::BypassBlueColorRefs);
+	INSTALL_HOOK(hooks::gui_controls::BetterWindowTitle);
 	INSTALL_HOOK(hooks::cmcs_support::LoadCodeEditorCtrlLib);
 }
 
