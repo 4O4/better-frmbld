@@ -1,13 +1,15 @@
 #include "hooks/cmcs_support.h"
 #include "utils/hook.h"
 #include "utils/filesystem.h"
+#include "vendor/inih/INIReader.h"
 
 namespace hooks::cmcs_support {
 	using utils::filesystem::FileExists;
 	bool IsUnicodeEnv();
+	void ReloadDllPathsConfig();
 
-	LPCSTR kCmcsUnicodeDllPath = "CMCS\\CMCS100U.DLL";
-	LPCSTR kCmcsNonUnicodeDllPath = "CMCS\\CMCS100.DLL";
+	LPCSTR cmcsUnicodeDllPath = "CMCS100U.DLL";
+	LPCSTR cmcsNonUnicodeDllPath = "CMCS100.DLL";
 	CDWORD kOcmax10uDllStrAddr = 0x64D82658; // UIW.64D82658
 	CDWORD kOcmax10DllStrAddr = 0x64D8264C; // UIW.64D8264C
 
@@ -26,16 +28,18 @@ namespace hooks::cmcs_support {
 
 		TAKE_REGISTERS_SNAPSHOT(reg);
 
+		ReloadDllPathsConfig();
+
 		if (IsUnicodeEnv()) {
-			if (FileExists(kCmcsUnicodeDllPath)) {
-				unicodeDllPathAddr = reinterpret_cast<DWORD>(kCmcsUnicodeDllPath);
+			if (FileExists(cmcsUnicodeDllPath)) {
+				unicodeDllPathAddr = reinterpret_cast<DWORD>(cmcsUnicodeDllPath);
 			}
 
 			finalDllPathAddr = unicodeDllPathAddr;
 		}
 		else {
-			if (FileExists(kCmcsNonUnicodeDllPath)) {
-				nonUnicodeDllPathAddr = reinterpret_cast<DWORD>(kCmcsNonUnicodeDllPath);
+			if (FileExists(cmcsNonUnicodeDllPath)) {
+				nonUnicodeDllPathAddr = reinterpret_cast<DWORD>(cmcsNonUnicodeDllPath);
 			}
 
 			finalDllPathAddr = nonUnicodeDllPathAddr;
@@ -62,5 +66,21 @@ namespace hooks::cmcs_support {
 			)
 			&&
 			(*someFlag & 1) == 1; // test byte ptr[eax + 0x1E1], 0x01;
+	}
+
+	void ReloadDllPathsConfig() {
+		char exepath[MAX_PATH + 1] = { 0 };
+		GetModuleFileNameA(NULL, exepath, MAX_PATH);
+
+		std::string inipath(exepath);
+		inipath.erase(inipath.rfind('\\'));
+		inipath.append("\\better-frmbld.ini");
+
+		INIReader reader(inipath.c_str());
+
+		if (reader.ParseError() >= 0) {
+			cmcsUnicodeDllPath = reader.Get("cmcs_support", "unicode_dll_path", cmcsUnicodeDllPath).c_str();
+			cmcsNonUnicodeDllPath = reader.Get("cmcs_support", "non_unicode_dll_path", cmcsNonUnicodeDllPath).c_str();
+		}
 	}
 }

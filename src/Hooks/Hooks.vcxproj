@@ -103,6 +103,10 @@
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <ProgramDatabaseFile>$(OutDir)$(TargetName).$(TargetExt).pdb</ProgramDatabaseFile>
     </Link>
+    <PostBuildEvent />
+    <PostBuildEvent>
+      <Command>xcopy $(ProjectDir)better-frmbld.ini $(OutputPath) /y /s /i</Command>
+    </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <ClCompile>
@@ -138,6 +142,9 @@
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <ProgramDatabaseFile>$(OutDir)$(TargetName).$(TargetExt).pdb</ProgramDatabaseFile>
     </Link>
+    <PostBuildEvent>
+      <Command>xcopy $(ProjectDir)better-frmbld.ini $(OutputPath) /y /s /i</Command>
+    </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <ClCompile>
@@ -194,6 +201,9 @@
     <ClCompile Include="utils\memory.cc" />
     <ClCompile Include="vendor\inih\ini.c" />
     <ClCompile Include="vendor\inih\INIReader.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="better-frmbld.ini" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
