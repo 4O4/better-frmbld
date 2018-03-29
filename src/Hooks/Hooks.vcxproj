@@ -73,6 +73,7 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <LinkIncremental>false</LinkIncremental>
     <TargetName>better-frmbld</TargetName>
+    <IncludePath>$(ProjectDir)\vendor\inih;$(IncludePath)</IncludePath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <LinkIncremental>true</LinkIncremental>
@@ -80,6 +81,7 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <LinkIncremental>false</LinkIncremental>
     <TargetName>better-frmbld</TargetName>
+    <IncludePath>$(ProjectDir)\vendor\inih;$(IncludePath)</IncludePath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <LinkIncremental>false</LinkIncremental>
@@ -164,6 +166,8 @@
     <ClInclude Include="core\targetver.h" />
     <ClInclude Include="hooks\gui_controls.h" />
     <ClInclude Include="utils\memory.h" />
+    <ClInclude Include="vendor\inih\ini.h" />
+    <ClInclude Include="vendor\inih\INIReader.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="hooks\cmcs_support.cc" />
@@ -186,6 +190,8 @@
     <ClCompile Include="core\stdafx.cc" />
     <ClCompile Include="hooks\gui_controls.cc" />
     <ClCompile Include="utils\memory.cc" />
+    <ClCompile Include="vendor\inih\ini.c" />
+    <ClCompile Include="vendor\inih\INIReader.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

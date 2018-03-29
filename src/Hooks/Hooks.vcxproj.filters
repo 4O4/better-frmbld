@@ -31,6 +31,18 @@
     <Filter Include="Source Files\utils">
       <UniqueIdentifier>{c28b44b5-c730-4474-9e56-6e58550ef488}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source Files\vendor">
+      <UniqueIdentifier>{890888f8-71da-45ce-b0fc-bc92d7892879}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\vendor\inih">
+      <UniqueIdentifier>{be689e68-56c5-4430-9f19-e2d172761938}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\vendor">
+      <UniqueIdentifier>{92729ccf-8ffe-4fc6-b841-afb70c47d057}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\vendor\inih">
+      <UniqueIdentifier>{0f687520-c3b5-4963-a88e-eaa01d530451}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="core\all_hooks.h">
@@ -48,20 +60,26 @@
     <ClInclude Include="core\targetver.h">
       <Filter>Header Files\core</Filter>
     </ClInclude>
-    <ClInclude Include="utils\fs_utils.h">
-      <Filter>Header Files\utils</Filter>
-    </ClInclude>
-    <ClInclude Include="utils\hook_utils.h">
-      <Filter>Header Files\utils</Filter>
-    </ClInclude>
-    <ClInclude Include="utils\mem_utils.h">
-      <Filter>Header Files\utils</Filter>
-    </ClInclude>
     <ClInclude Include="hooks\gui_controls.h">
       <Filter>Header Files\hooks</Filter>
     </ClInclude>
     <ClInclude Include="hooks\cmcs_support.h">
       <Filter>Header Files\hooks</Filter>
+    </ClInclude>
+    <ClInclude Include="utils\memory.h">
+      <Filter>Header Files\utils</Filter>
+    </ClInclude>
+    <ClInclude Include="utils\hook.h">
+      <Filter>Header Files\utils</Filter>
+    </ClInclude>
+    <ClInclude Include="utils\filesystem.h">
+      <Filter>Header Files\utils</Filter>
+    </ClInclude>
+    <ClInclude Include="vendor\inih\ini.h">
+      <Filter>Header Files\vendor\inih</Filter>
+    </ClInclude>
+    <ClInclude Include="vendor\inih\INIReader.h">
+      <Filter>Header Files\vendor\inih</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -74,17 +92,28 @@
     <ClCompile Include="core\stdafx.cc">
       <Filter>Source Files\core</Filter>
     </ClCompile>
-    <ClCompile Include="utils\fs_utils.cc">
-      <Filter>Source Files\utils</Filter>
-    </ClCompile>
-    <ClCompile Include="utils\mem_utils.cc">
-      <Filter>Source Files\utils</Filter>
-    </ClCompile>
     <ClCompile Include="hooks\gui_controls.cc">
       <Filter>Source Files\hooks</Filter>
     </ClCompile>
     <ClCompile Include="hooks\cmcs_support.cc">
       <Filter>Source Files\hooks</Filter>
     </ClCompile>
+    <ClCompile Include="utils\memory.cc">
+      <Filter>Source Files\utils</Filter>
+    </ClCompile>
+    <ClCompile Include="utils\filesystem.cc">
+      <Filter>Source Files\utils</Filter>
+    </ClCompile>
+    <ClCompile Include="vendor\inih\ini.c">
+      <Filter>Source Files\vendor\inih</Filter>
+    </ClCompile>
+    <ClCompile Include="vendor\inih\INIReader.cpp">
+      <Filter>Source Files\vendor\inih</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="better-frmbld.ini">
+      <Filter>Resource Files</Filter>
+    </None>
   </ItemGroup>
 </Project>
